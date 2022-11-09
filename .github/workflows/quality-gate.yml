@@ -1,0 +1,19 @@
+name: 'Trigger quality gate on specific branch'
+## Trigggered by dispatch event that contains branch input.
+
+## Originally triggered from these repositories:
+## chillianosson/action-practice
+
+on:
+  repository_dispatch:
+      types: [dispatch_demo_deploy]
+
+jobs:
+  log-inputs:
+    name: Log inputs
+    runs-on: [self-hosted, ubuntu-latest, ondemand]
+    steps:
+    - name: Display inputs
+      run: |
+        echo "DISPATCH INPUTS:"
+        echo '${{ toJson(github.event.client_payload) }}'
