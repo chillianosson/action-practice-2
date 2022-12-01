@@ -15,3 +15,4 @@ jobs:
         repository: chillianosson/action-practice
         event-type: demo_deploy_trigger_tests
         client-payload: '{"ref-name": "feature/testing-trigger", "demo-url": "fake-demo-url.com", "pr-number": "8"}'
+
