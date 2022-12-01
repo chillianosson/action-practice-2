@@ -14,4 +14,4 @@ jobs:
         token: ${{ secrets.PAT }}
         repository: chillianosson/action-practice
         event-type: demo_deploy_trigger_tests
-        client-payload: '{"ref_name": "feature/testing-trigger", "demo_url": "fake-demo-url.com", "pr_number": "8"}'
+        client-payload: '{"ref-name": "feature/testing-trigger", "demo-url": "fake-demo-url.com", "pr-number": "8"}'
