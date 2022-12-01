@@ -8,10 +8,14 @@ jobs:
     name: Dispatch event with branch and repo refs
     runs-on: ubuntu-latest
     steps:
+    - name: Set values
+      run: |
+        echo "BRANCH=feature/testing-trigger" >> $GITHUB_ENV
+
     - name: Repository Dispatch
       uses: peter-evans/repository-dispatch@v2
       with:
         token: ${{ secrets.PAT }}
         repository: chillianosson/action-practice
         event-type: demo_deploy_trigger_tests
-        client-payload: '{"ref-name": "feature/testing-trigger", "demo-url": "fake-demo-url.com", "pr-number": "8"}'
+        client-payload: '{"ref_name": "${{ env.BRANCH }}"}'
