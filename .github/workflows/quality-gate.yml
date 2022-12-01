@@ -1,19 +1,17 @@
-name: 'Trigger quality gate on specific branch'
-## Trigggered by dispatch event that contains branch input.
-
-## Originally triggered from these repositories:
-## chillianosson/action-practice
+name: 'Dispatch to trigger other repo'
 
 on:
-  repository_dispatch:
-      types: [dispatch_demo_deploy]
+  workflow_dispatch:
 
 jobs:
-  log-inputs:
-    name: Log inputs
+  repo_event:
+    name: Dispatch event with branch and repo refs
     runs-on: [self-hosted, ubuntu-latest, ondemand]
     steps:
-    - name: Display inputs
-      run: |
-        echo "DISPATCH INPUTS:"
-        echo '${{ toJson(github.event.client_payload) }}'
+    - name: Repository Dispatch
+      uses: peter-evans/repository-dispatch@v2
+      with:
+        token: ${{ secrets.PAT }}
+        repository: chillianosson/action-practice
+        event-type: demo_deploy_trigger_tests
+        client-payload: '{"ref_name": "feature/testing-trigger", "demo_url": "${{ env.CI_DEMO_URL }}"}'
