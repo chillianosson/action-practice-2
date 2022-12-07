@@ -19,14 +19,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - env:
-          MESSAGE: ${{ github.event.client_payload.ref_name }}
-        run: echo $MESSAGE
+          BRANCH_NAME: ${{ github.event.client_payload.ref_name }}
+        run: echo $BRANCH_NAME
 
+  set_demo_available_label:
+    name: Set demo available label
+    runs-on: ubuntu-latest
+    steps:
       - name: Checkout branch
         uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.client_payload.ref_name }}
+          ref: feature/correct-branch-name-reference
           token: ${{ secrets.PAT }}
 
-      - name: Comment the pull_request
+      - name: Add label
         run: gh pr comment 2 --body "Hi quality gate you can now runnnnnnnnn"
+        # gh pr edit 2 --add-label "environment-available"
