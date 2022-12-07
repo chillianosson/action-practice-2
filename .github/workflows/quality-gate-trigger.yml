@@ -32,8 +32,8 @@ jobs:
           ref: ${{ github.event.client_payload.ref_name }}
           token: ${{ secrets.PAT }}
 
-      - name: Add comment
-        run: gh pr review --comment -b "Review Comment quality gate you can now runnnnnnnnn"
+      - name: Run quality gate
+        run: gh workflow run quality-gate.yml
 
   # set_demo_available_label:
   #   name: Set demo available label

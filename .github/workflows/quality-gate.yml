@@ -1,18 +1,10 @@
 name: "Quality Gate"
 
 on:
-  # pull_request_review_comment:
-  issue_comment:
-  pull_request_review:
-  pull_request_review_comment:
-
-
-env:
-  GH_TOKEN: ${{ secrets.PAT }}
+  workflow_run:
 
 jobs:
   run_quality_gate:
-    # if: ${{ github.event.issue.pull_request && contains(github.event.comment.body, 'quality gate') }}
     runs-on: ubuntu-latest
     steps:
       - run: |
