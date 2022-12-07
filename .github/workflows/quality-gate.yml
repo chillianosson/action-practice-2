@@ -8,7 +8,7 @@ env:
 
 jobs:
   run_quality_gate:
-    if: ${{ github.event.issue.pull_request && contains(github.event.comment.body, 'quality gate') }}
+    # if: ${{ github.event.issue.pull_request && contains(github.event.comment.body, 'quality gate') }}
     runs-on: ubuntu-latest
     steps:
       - run: |
