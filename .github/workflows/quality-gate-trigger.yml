@@ -33,5 +33,5 @@ jobs:
           token: ${{ secrets.PAT }}
 
       - name: Add label
-        run: |
-          gh pr edit 2 --add-label "environment-available"
+        run: gh pr comment 2 --body "Hi quality gate you can now runnnnnnnnn"
+        # gh pr edit 2 --add-label "environment-available"
