@@ -1,18 +1,14 @@
-name: 'Dispatch to trigger other repo'
+name: "Quality Gate"
 
 on:
-  workflow_dispatch:
+  issue_comment:
+
+env:
+  GH_TOKEN: ${{ secrets.PAT }}
 
 jobs:
-  repo_event:
-    name: Dispatch event with branch and repo refs
+  run_quality_gate:
+    # if: ${{ github.event.issue.pull_request && contains(github.event.comment.body, 'quality gate') }}
     runs-on: ubuntu-latest
     steps:
-    - name: Repository Dispatch
-      uses: peter-evans/repository-dispatch@v2
-      with:
-        token: ${{ secrets.PAT }}
-        repository: chillianosson/action-practice
-        event-type: demo_deploy_trigger_tests
-        client-payload: '{"ref-name": "feature/testing-trigger", "demo-url": "fake-demo-url.com", "pr-number": "8"}'
-
+      - run: echo 'The comment was added correctly and quality gate can run'

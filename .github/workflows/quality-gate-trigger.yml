@@ -1,0 +1,49 @@
+name: "Dispatch to trigger other repo"
+
+on:
+  repository_dispatch:
+    name: Quality Gate
+    types: [demo_deploy_trigger_tests]
+    inputs:
+      ref_name:
+        description: "Branch Reference for context"
+        required: true
+        default: "incorrect-branch-name"
+
+env:
+  GH_TOKEN: ${{ secrets.PAT }}
+
+jobs:
+  log-inputs:
+    name: Log inputs
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          BRANCH_NAME: ${{ github.event.client_payload.ref_name }}
+        run: echo $BRANCH_NAME
+
+  set_demo_available_comment:
+    name: Set demo available comment
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+        with:
+          ref: feature/correct-branch-name-reference
+          token: ${{ secrets.PAT }}
+
+      - name: Add comment
+        run: gh pr review 2 --comment "Hi quality gate you can now runnnnnnnnn"
+
+  # set_demo_available_label:
+  #   name: Set demo available label
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout branch
+  #       uses: actions/checkout@v3
+  #       with:
+  #         ref: feature/correct-branch-name-reference
+  #         token: ${{ secrets.PAT }}
+
+  #     - name: Add label
+  #       run: gh pr edit 2 --add-label "environment-available"
