@@ -16,4 +16,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo "Branch supplied: ${{ github.event.inputs.ref_name }}"
+          echo "Branch supplied: ${{ github.event.inputs.ref_name }}"c
