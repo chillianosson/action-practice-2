@@ -23,7 +23,7 @@ jobs:
         run: echo $BRANCH_NAME
 
   set_demo_available_label:
-    name: Set demo available label
+    name: Set demo available comment
     runs-on: ubuntu-latest
     steps:
       - name: Checkout branch
