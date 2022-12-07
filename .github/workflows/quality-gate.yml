@@ -17,4 +17,4 @@ jobs:
       - run: |
           echo "Branch supplied: $BRANCH"
         env:
-          BRANCH: ${{ inputs.ref_name }}
+          BRANCH: ${{ github.event.inputs.ref_name }}
