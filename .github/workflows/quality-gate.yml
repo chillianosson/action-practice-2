@@ -13,5 +13,11 @@ jobs:
   run_quality_gate:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.client_payload.ref_name }}
+          token: ${{ secrets.PAT }}
+
       - run: |
-          echo 'The comment was added correctly and quality gate can run'
+          echo 'The workflow has been triggered'
