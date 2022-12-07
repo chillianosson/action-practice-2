@@ -3,6 +3,8 @@ name: "Quality Gate"
 on:
   issue_comment:
     types: [created]
+  pull_request:
+    types: [labeled]
 
 env:
   GH_TOKEN: ${{ secrets.PAT }}

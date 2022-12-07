@@ -29,4 +29,5 @@ jobs:
           token: ${{ secrets.PAT }}
 
       - name: Comment the pull_request
-        run: gh pr comment 2 --body "Hi quality gate you can now runn"
+        # run: gh pr comment 2 --body "Hi quality gate you can now runn"
+        run: gh pr edit 2 --add-label "environment-available"
