@@ -1,0 +1,37 @@
+name: 'Dispatch to trigger other repo'
+
+on:
+  repository_dispatch:
+    name: Quality Gate
+    types: [demo_deploy_trigger_tests]
+    inputs:
+      ref_name:
+        description: 'Branch Reference for context'
+        required: true
+        default: 'incorrect-branch-name'
+
+env:
+  GH_TOKEN: ${{ secrets.PAT }}
+
+jobs:
+  log-inputs:
+    name: Log inputs
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          MESSAGE: ${{ github.event.client_payload.ref_name }}
+        run: echo $MESSAGE
+
+      - name: Checkout branch
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.client_payload.ref_name }}
+          token: ${{ secrets.PAT }}
+
+      - name: Comment a pull_request
+        uses: mb2dev/github-action-comment-pull-request@1.0.0
+        with:
+          message: "Hello, It's my first comment with Github action !"
+          GITHUB_TOKEN: ${{ secrets.PAT }}
+          reactions: "+1 | -1 | laugh | hooray | confused | heart | rocket | eyes"
+

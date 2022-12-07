@@ -1,44 +1,13 @@
-name: 'Dispatch to trigger other repo'
+name: "Quality Gate"
 
 on:
-  repository_dispatch:
-    name: Quality Gate
-    types: [demo_deploy_trigger_tests]
-    inputs:
-      ref_name:
-        description: 'Branch Reference for context'
-        required: true
-        default: 'incorrect-branch-name'
-
-env:
-  GH_TOKEN: ${{ secrets.PAT }}
+  issues:
+    types:
+      - labeled
 
 jobs:
-  log-inputs:
-    name: Log inputs
+  run_if_label_matches:
+    if: github.event.label.name == 'environment-available'
     runs-on: ubuntu-latest
     steps:
-      - env:
-          MESSAGE: ${{ github.event.client_payload.ref_name }}
-        run: echo $MESSAGE
-
-  getPrNumber:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/github-script@v2
-        id: get-pr-number
-        with:
-          script: |
-            const {data: pulls} = await github.pulls.list({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              state: 'open',
-              head: '${{ github.event.client_payload.ref_name }}'
-            })
-            return pulls[0].number
-          result-encoding: string
-
-      - uses: actions/github-script@v2
-        env:
-          PR_NUMBER: ${{ steps.get-pr-number.outputs.result }}
-          run: echo $PR_NUMBER
+      - run: echo 'The label was added correctly'
