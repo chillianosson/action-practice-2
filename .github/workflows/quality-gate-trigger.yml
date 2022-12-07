@@ -1,4 +1,4 @@
-name: "Dispatch to trigger other workflow"
+name: "Quality Gate Trigger"
 
 on:
   repository_dispatch:
