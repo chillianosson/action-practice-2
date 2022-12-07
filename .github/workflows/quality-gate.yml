@@ -12,8 +12,10 @@ on:
 
 
 jobs:
-  log-the-inputs:
+  log-inputs:
+    name: Log inputs
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          echo "Branch supplied: ${{ github.event.inputs.ref_name }}"c
+    - name: Display inputs
+      run: |
+        echo '${{ toJson(github.event.inputs) }}'
