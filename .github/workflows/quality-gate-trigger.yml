@@ -5,7 +5,7 @@ on:
     name: Quality Gate
     types: [demo_deploy_trigger_tests]
     inputs:
-      ref_name: # feature/test-pr
+      ref_name: # feature/test-branch
         description: "Branch Reference for context"
         required: true
         default: "incorrect-branch-name"
