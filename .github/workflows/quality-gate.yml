@@ -16,6 +16,6 @@ jobs:
     name: Log inputs
     runs-on: ubuntu-latest
     steps:
-    - name: Display inputs
-      run: |
-        echo '${{ toJson(github.event.inputs) }}'
+      - env:
+          MESSAGE: ${{ github.event.client_payload.ref_name }}
+        run: echo $MESSAGE
