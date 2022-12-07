@@ -19,8 +19,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - env:
-          MESSAGE: ${{ github.event.client_payload.ref_name }}
-        run: echo $MESSAGE
+          BRANCH_NAME: ${{ github.event.client_payload.ref_name }}
+        run: echo $BRANCH_NAME
 
       - name: Checkout branch
         uses: actions/checkout@v3
