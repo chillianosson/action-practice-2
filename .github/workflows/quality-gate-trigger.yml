@@ -22,7 +22,7 @@ jobs:
           BRANCH_NAME: ${{ github.event.client_payload.ref_name }}
         run: echo $BRANCH_NAME
 
-  set_demo_available_label:
+  set_demo_available_comment:
     name: Set demo available comment
     runs-on: ubuntu-latest
     steps:
@@ -32,6 +32,18 @@ jobs:
           ref: feature/correct-branch-name-reference
           token: ${{ secrets.PAT }}
 
-      - name: Add label
+      - name: Add comment
         run: gh pr comment 2 --body "Hi quality gate you can now runnnnnnnnn"
-        # gh pr edit 2 --add-label "environment-available"
+
+  # set_demo_available_label:
+  #   name: Set demo available label
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout branch
+  #       uses: actions/checkout@v3
+  #       with:
+  #         ref: feature/correct-branch-name-reference
+  #         token: ${{ secrets.PAT }}
+
+  #     - name: Add label
+  #       run: gh pr edit 2 --add-label "environment-available"

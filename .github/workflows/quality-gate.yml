@@ -2,7 +2,6 @@ name: "Quality Gate"
 
 on:
   issue_comment:
-    types: [created]
 
 env:
   GH_TOKEN: ${{ secrets.PAT }}
@@ -12,4 +11,4 @@ jobs:
     if: ${{ github.event.issue.pull_request && contains(github.event.comment.body, 'quality gate') }}
     runs-on: ubuntu-latest
     steps:
-      - run: echo 'The label was added correctly and quality gate can run'
+      - run: echo 'The comment was added correctly and quality gate can run'
