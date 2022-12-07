@@ -10,6 +10,8 @@ on:
         required: true
         default: 'incorrect-branch-name'
 
+env:
+  GH_TOKEN: ${{ secrets.PAT }}
 
 jobs:
   log-inputs:
@@ -19,3 +21,24 @@ jobs:
       - env:
           MESSAGE: ${{ github.event.client_payload.ref_name }}
         run: echo $MESSAGE
+
+  getPrNumber:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v2
+        id: get-pr-number
+        with:
+          script: |
+            const {data: pulls} = await github.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              head: '${{ github.event.client_payload.ref }}'
+            })
+            return pulls[0].number
+          result-encoding: string
+
+      - uses: actions/github-script@v2
+        env:
+          PR_NUMBER: ${{ steps.get-pr-number.outputs.result }}
+          run: echo $PR_NUMBER
