@@ -1,14 +1,15 @@
 name: "Quality Gate"
 
 on:
-  issue_comment:
+  pull_request_review_comment:
 
 env:
   GH_TOKEN: ${{ secrets.PAT }}
 
 jobs:
   run_quality_gate:
-    # if: ${{ github.event.issue.pull_request && contains(github.event.comment.body, 'quality gate') }}
+    if: ${{ github.event.issue.pull_request && contains(github.event.comment.body, 'quality gate') }}
     runs-on: ubuntu-latest
     steps:
-      - run: echo 'The comment was added correctly and quality gate can run'
+      - run: |
+          echo 'The comment was added correctly and quality gate can run'
