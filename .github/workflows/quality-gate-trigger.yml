@@ -29,4 +29,4 @@ jobs:
           token: ${{ secrets.PAT }}
 
       - name: Comment the pull_request
-        run: gh pr comment 1 --body "Hi quality gate you can now run"
+        run: gh pr comment 1 --body "Hi quality gate you can now runnnnnnnnn"
