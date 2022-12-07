@@ -29,7 +29,7 @@ jobs:
       - name: Checkout branch
         uses: actions/checkout@v3
         with:
-          ref: feature/correct-branch-name-reference
+          ref: ${{ github.event.inputs.ref_name }}
           token: ${{ secrets.PAT }}
 
       - name: Add comment
