@@ -1,21 +1,20 @@
 name: 'Dispatch to trigger other repo'
 
 on:
-  workflow_dispatch:
+  repository_dispatch:
+    types: [demo_deploy_trigger_tests]
+    inputs:
+      branchReference:
+        description: 'Branch Reference for context'
+        required: true
+        default: 'incorrect-branch-name'
+
 
 jobs:
-  repo_event:
-    name: Dispatch event with branch and repo refs
+  log-the-inputs:
     runs-on: ubuntu-latest
     steps:
-    - name: Set values
-      run: |
-        echo "BRANCH=feature/testing-trigger" >> $GITHUB_ENV
-
-    - name: Repository Dispatch
-      uses: peter-evans/repository-dispatch@v2
-      with:
-        token: ${{ secrets.PAT }}
-        repository: chillianosson/action-practice
-        event-type: demo_deploy_trigger_tests
-        client-payload: '{"ref_name": "${{ env.BRANCH }}"}'
+      - run: |
+          echo "Branch supplied: $BRANCH"
+        env:
+          BRANCH: ${{ inputs.logLevel }}
