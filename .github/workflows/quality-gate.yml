@@ -33,7 +33,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               state: 'open',
-              head: '${{ github.event.client_payload.ref }}'
+              head: '${{ github.event.client_payload.ref_name }}'
             })
             return pulls[0].number
           result-encoding: string
