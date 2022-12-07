@@ -2,7 +2,7 @@ name: "Dispatch to trigger other workflow"
 
 on:
   repository_dispatch:
-    name: Quality Gate
+    name: Quality Gate Trigger
     types: [demo_deploy_trigger_tests]
     inputs:
       ref_name: # feature/test-branch

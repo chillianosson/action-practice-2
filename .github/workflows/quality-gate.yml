@@ -2,6 +2,9 @@ name: "Quality Gate"
 
 on:
   workflow_run:
+    workflows: [Quality Gate Trigger]
+    types:
+      - completed
 
 jobs:
   run_quality_gate:
