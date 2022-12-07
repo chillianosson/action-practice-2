@@ -4,7 +4,7 @@ on:
   repository_dispatch:
     types: [demo_deploy_trigger_tests]
     inputs:
-      branchReference:
+      ref_name:
         description: 'Branch Reference for context'
         required: true
         default: 'incorrect-branch-name'
@@ -17,4 +17,4 @@ jobs:
       - run: |
           echo "Branch supplied: $BRANCH"
         env:
-          BRANCH: ${{ inputs.logLevel }}
+          BRANCH: ${{ inputs.ref_name }}
