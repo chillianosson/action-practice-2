@@ -6,6 +6,9 @@ on:
     types:
       - completed
 
+env:
+  GH_TOKEN: ${{ secrets.PAT }}
+
 jobs:
   run_quality_gate:
     runs-on: ubuntu-latest
