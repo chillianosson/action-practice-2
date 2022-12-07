@@ -28,10 +28,6 @@ jobs:
           ref: ${{ github.event.client_payload.ref_name }}
           token: ${{ secrets.PAT }}
 
-      - name: Comment a pull_request
-        uses: mb2dev/github-action-comment-pull-request@1.0.0
-        with:
-          message: "Hello, It's my first comment with Github action !"
-          GITHUB_TOKEN: ${{ secrets.PAT }}
-          reactions: "+1 | -1 | laugh | hooray | confused | heart | rocket | eyes"
+      - name: Comment the pull_request
+        run: gh pr comment 1 --body "Hi quality gate"
 
